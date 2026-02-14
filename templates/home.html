@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>California Housing Price Prediction</title>
+
+  <!-- Updated Formal Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: #0b1f3a; /* Dark Blue Background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+    }
+
+    .info-section {
+      flex: 1.2;
+      padding: 40px;
+      background: #f4f6fb;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+      max-height: 85vh;
+    }
+
+    .info-section h2,
+    .form-section h2 {
+      font-weight: 700;
+      color: #0b1f3a;
+    }
+
+    .info-section h3 {
+      margin-top: 25px;
+      font-size: 16px;
+      color: #1a2d4a;
+    }
+
+    .info-section p,
+    .info-section li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .info-section ul {
+      padding-left: 20px;
+    }
+
+    .info-section code {
+      background: #e8edf7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .info-section a {
+      color: #0b3d91;
+      text-decoration: none;
+    }
+
+    .info-section a:hover {
+      text-decoration: underline;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      background: #ffffff;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #1a2d4a;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: 'Playfair Display', serif;
+      transition: 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0b3d91;
+      outline: none;
+      box-shadow: 0 0 6px rgba(11, 61, 145, 0.4);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #0b3d91;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #072a63;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .prediction {
+      margin-top: 20px;
+      padding: 12px;
+      background: #eef2fb;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      color: #0b1f3a;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .info-section {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="container">
+
+    <!-- DATASET INFORMATION -->
+    <div class="info-section">
+      <h2>California Housing Dataset</h2>
+
+      <h3>Data Set Characteristics</h3>
+      <p><strong>Number of Instances:</strong> 20,640</p>
+      <p><strong>Number of Attributes:</strong> 8 numeric predictive attributes + 1 target variable</p>
+      <p><strong>Missing Attribute Values:</strong> None</p>
+
+      <h3>Attribute Information</h3>
+      <ul>
+        <li><strong>MedInc</strong> – Median income in block group</li>
+        <li><strong>HouseAge</strong> – Median house age in block group</li>
+        <li><strong>AveRooms</strong> – Average number of rooms per household</li>
+        <li><strong>AveBedrms</strong> – Average number of bedrooms per household</li>
+        <li><strong>Population</strong> – Block group population</li>
+        <li><strong>AveOccup</strong> – Average number of household members</li>
+        <li><strong>Latitude</strong> – Block group latitude</li>
+        <li><strong>Longitude</strong> – Block group longitude</li>
+      </ul>
+
+      <h3>Target Variable</h3>
+      <p>
+        The target variable is the median house value for California districts,
+        expressed in hundreds of thousands of dollars ($100,000 units).
+      </p>
+
+      <h3>Dataset Description</h3>
+      <p>
+        This dataset was derived from the 1990 U.S. Census, using one row per census
+        block group. A block group is the smallest geographical unit for which the
+        U.S. Census Bureau publishes sample data (typically between 600 and 3,000 people).
+      </p>
+
+      <p>
+        A household is defined as a group of people residing within a home.
+        Since the average number of rooms and bedrooms are provided per household,
+        these columns may contain large values in block groups with few households
+        and many empty houses (e.g., vacation resorts).
+      </p>
+
+      <h3>Source & Download</h3>
+      <p>
+        Obtained from the StatLib repository:
+        <br>
+        <a href="https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html" target="_blank">
+          https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html
+        </a>
+      </p>
+
+      <p>
+        It can also be loaded directly in Python using:
+        <br>
+        <code>sklearn.datasets.fetch_california_housing()</code>
+      </p>
+
+      <h3>Feature List</h3>
+      <p>
+        ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms',
+        'Population', 'AveOccup', 'Latitude', 'Longitude']
+      </p>
+
+      <h3>Reference</h3>
+      <p>
+        Pace, R. Kelley and Ronald Barry (1997).  
+        <em>Sparse Spatial Autoregressions</em>,  
+        Statistics and Probability Letters, 33, 291–297.
+      </p>
+
+      <h3>Model Selection & Performance</h3>
+      <p>
+        The selected model for this application is <strong>LightGBM</strong>.
+        Compared to AdaBoost, Linear Regression, and XGBoost,
+        LightGBM achieved the best performance with an
+        <strong>R² score of 0.866</strong> on the test dataset.
+      </p>
+
+    </div>
+
+    <!-- PREDICTION FORM -->
+    <div class="form-section">
+      <h2>House Price Prediction</h2>
+
+      <form action="{{ url_for('predict') }}" method="post">
+
+        <div class="form-group">
+          <label>Median Income (MedInc)</label>
+          <input type="text" name="MedInc" required>
+        </div>
+
+        <div class="form-group">
+          <label>House Age (HouseAge)</label>
+          <input type="text" name="HouseAge" required>
+        </div>
+
+        <div class="form-group">
+          <label>Average Rooms (AveRooms)</label>
+          <input type="text" name="AveRooms" required>
+        </div>
+
+        <div class="form-group">
+          <label>Average Bedrooms (AveBedrms)</label>
+          <input type="text" name="AveBedrms" required>
+        </div>
+
+        <div class="form-group">
+          <label>Population</label>
+          <input type="text" name="Population" required>
+        </div>
+
+        <div class="form-group">
+          <label>Average Occupancy (AveOccup)</label>
+          <input type="text" name="AveOccup" required>
+        </div>
+
+        <div class="form-group">
+          <label>Latitude</label>
+          <input type="text" name="Latitude" required>
+        </div>
+
+        <div class="form-group">
+          <label>Longitude</label>
+          <input type="text" name="Longitude" required>
+        </div>
+
+        <button type="submit">Predict House Value</button>
+      </form>
+
+      <div class="prediction">
+        {{ prediction_text }}
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
