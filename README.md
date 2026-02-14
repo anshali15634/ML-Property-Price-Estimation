@@ -10,8 +10,6 @@ This project covers the complete ML lifecycle:
 - Model Selection & Optimization  
 - Web-based inference  
 
----
-
 ## Technical Implementation
 
 ### Data Analysis & Feature Analysis
@@ -24,8 +22,6 @@ This project covers the complete ML lifecycle:
   - `Longitude`
 - Evaluated feature impact on the target variable:
   - `MedianHouseValue`
-
----
 
 ### Model Selection & Optimization
 
@@ -41,8 +37,6 @@ Benchmarked multiple regression algorithms using **Scikit-Learn**:
 - Achieved an **R² Score of 0.866**
 - Demonstrated better generalization and predictive accuracy
 
----
-
 ### Inference Pipeline
 
 - Serialized trained model and scalers using **Pickle**
@@ -51,8 +45,6 @@ Benchmarked multiple regression algorithms using **Scikit-Learn**:
   - Accept `POST` requests
   - Process district-level housing data
   - Return predicted median values
-
----
 
 ## Web Integration
 
@@ -63,8 +55,6 @@ Users can:
 1. Input district-level data
 2. Submit for evaluation
 3. Receive instant housing price predictions
-
----
 
 ## Key Technical Stack
 
@@ -83,9 +73,6 @@ Users can:
 - HTML5
 - CSS
 
-
----
-
 ## Performance Metrics
 
 | Metric | Value |
@@ -94,8 +81,6 @@ Users can:
 | **Evaluation Metric** | R² |
 | **Score Achieved** | **0.866** |
 
----
-
 ## Outcome
 
 A production-ready, end-to-end Machine Learning system capable of:
@@ -103,8 +88,3 @@ A production-ready, end-to-end Machine Learning system capable of:
 - Performing real-time inference
 - Maintaining feature consistency
 - Delivering high-accuracy predictions
-- Operating through a cloud-deployed web interface
-
----
-
-> End-to-End ML | Model Optimization | REST API | Cloud Deployment
